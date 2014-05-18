@@ -24,7 +24,7 @@ setup(
     test_suite='ip2country',
     author='Kohei YOSHIDA',
     author_email='license@yosida95.com',
-    description='OAuth 2.0 library for Python 3.',
+    description='Lookup country code (iso 3166) by IP address.',
     long_description=readme,
     license=license,
     url='https://github.com/yosida95/ip2country',
