@@ -1,0 +1,16 @@
+language: python
+env:
+    matrix:
+        - TOXENV="py33"
+        - TOXENV="py34"
+        - TOXENV="coverage"
+install:
+    - pip install tox
+    - if test "$TOXENV" = "coverage"; then pip install coveralls; fi
+script:
+    - tox
+after_success:
+    - if test "$TOXENV" = "coverage"; then coveralls; fi
+notifications:
+    slack:
+        - gehirn:xxuGA4N6aUYhTmKJYdM15ieu
