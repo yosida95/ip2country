@@ -21,6 +21,44 @@ Or
 
   $ python setup.py install
 
+
+----------
+How to use
+----------
+
+First: Implement IStore Interface
+---------------------------------
+You must implement IStore interface in ip2country/interfaces.py.
+
+There is a sample implementation in example/store.
+This implementation is stored all records on the system memory.
+
+Second: Store the records
+-------------------------
+.. code:: python
+
+    store = Store()
+    parser = Parser(store)
+    with open(RECORD_FILE) as fp:
+        parser.do(fp)
+
+See examples/lookup.py:load for more detail.
+
+Third: Lookup the IPAddress
+---------------------------
+
+.. code:: python
+
+    store = Store()
+    record = store.lookup(IP_ADDRESS)
+    if record is None:
+        print('Record not found')
+    else:
+        print('{0} is allocated to {1}'.format(IP_ADDRESS, record.cc))
+
+See examples/lookup.py:main for more detail.
+
+
 -------------
 Run the tests
 -------------
