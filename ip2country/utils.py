@@ -12,8 +12,12 @@ def ipv6_to_bytes(ip):
     length = len(parts)
     if length < 8:
         index = parts.index('')
+        if index == 0:
+            parts[0] = '0'
+            index += 1
+
         parts =\
-            parts[:index] + list('0' * (9 - length)) + parts[index + 1:]
+            parts[:index] + list('0' * (7 - index)) + parts[index + 1:]
 
         if parts[-1] == '':
             parts[-1] = '0'
