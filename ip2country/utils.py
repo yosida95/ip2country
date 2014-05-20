@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 __all__ = ['ipv4_to_bytes', 'ipv6_to_bytes']
 
 
+
+def make_bytes(seq):
+    if sys.version_info[0] >= 3:
+        return bytes(seq)
+    else:
+        return ''.join(chr(i) for i in seq)
+
+
 def ipv4_to_bytes(ip):
-    return bytes(int(part) for part in ip.split('.'))
+    return make_bytes(int(part) for part in ip.split('.'))
 
 
 def ipv6_to_bytes(ip):
@@ -25,6 +35,6 @@ def ipv6_to_bytes(ip):
         assert len(parts) == 8
 
     return b''.join(
-        bytes([int(part[-4:-2] or '0', 16), int(part[-2:], 16)])
+        make_bytes([int(part[-4:-2] or '0', 16), int(part[-2:], 16)])
         for part in parts
     )
